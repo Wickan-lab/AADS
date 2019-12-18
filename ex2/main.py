@@ -5,11 +5,19 @@ TIME_SLICE = 1
 current_executing_job = None
 
 class MyAdaptablePriorityQueue(AdaptableHeapPriorityQueue):
-    pass
+    """
+    override dei metodi ustai per costruire heap e fare confronti
+    """
+
 
 
 q = AdaptableHeapPriorityQueue()
 i = 0
+"""
+Usiamo un tempo di arrivo perchè anche se ho due job con stessa priorità e stessa lunghezza, posso dire che quello che sta nella coda da più tempo viene eseguito prima.
+(Potrebbe accadere che magari alla slice dopo quella attuale la priorità di quel job sarebbe stata aumentata, ma non lo ha fatto ancora, quindi lui sta da più tempo dentro la coda ed eseguo
+prima lui)
+"""
 while True:
     if current_executing_job:
         print("Slice " + str(i) + " Executing : " + str(current_executing_job))
