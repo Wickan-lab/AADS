@@ -84,15 +84,26 @@ def iterative_dfs(g, u,DEBUG=False):
 	act_edge = None
 	prev_edge = None
 	#prendi gli archi incidenti al vertice attuale
-	#considera tutti gli archi incidenti, se sono unexplored, visita il vertice, altrimenti passa al prossimo arco se non è discovery channel
+	#considera tutti gli archi incidenti, se sono unexplored, visita il vertice, altrimenti passa al prossimo arco se non è discovery
 	#se non ci sono altri archi termina, altrimenti ripeti dal punto 1	
-	i = 1
+	i = 0
+
 	#tolgo la u
 
-
+	print(g.vertex_count())
 
 	while i < (g.vertex_count()):
-		#print('n_it')
+
+		if not act.is_visited():
+			act.set_visited()
+			i+=1
+			if DEBUG:
+				print('Incrementing i ' + str(i))
+				print()
+
+		#print(i)
+		#print([str(x) for x in g.incident_edges(act)])
+
 		if not going_back:
 			print("DFS " + str(act) + ' ' + str(act_edge))
 		else:
@@ -109,14 +120,18 @@ def iterative_dfs(g, u,DEBUG=False):
 			if e.is_unexplored():
 
 				if not e.opposite(act).is_visited():
+					##evita blind spot
+					if g.degree(e.opposite(act)) <= 1:
 
-					if g.degree(e.opposite(act)) == 1:
-						
 						blind_spot = e.opposite(act)
 						blind_spot.set_visited()
 						e.set_discovery()
-						print("Act " + str(act) + " blind_spot " + str(blind_spot) + ' ' + str(e))
+						print("blind_spot DFS " + str(blind_spot) + ' ' + str(e))
 						i += 1
+						if DEBUG:
+							print('Incrementing i for a blind spot ' + str(i))
+							print()
+						
 						#se il while si conclude con questa i allora la condizione non + verificata subito e avviene una stampa un più ?
 						#non andrò in quei nodi quindi incremento
 
@@ -127,6 +142,7 @@ def iterative_dfs(g, u,DEBUG=False):
 							print("New node " + str(new))
 						e.set_discovery()
 						new_edge = e
+						
 						break
 						"""Che succede se un nodo ha solo blind spot ? Chi è il new ?"""
 
@@ -135,117 +151,39 @@ def iterative_dfs(g, u,DEBUG=False):
 					if DEBUG:
 						print("Edge " + str(e) + " is now set as back")
 					e.set_back()
-
 		"""
 		"""
 		if DEBUG:
 			print("Act " + str(act) + " is now set as visited")
-		act.set_visited()#solo se non ci sono più edge da esplorare
 		"""
 		"""
-		
 		if new == act:
-			#nodo con solo blind spot
+			#nodo con solo blind spot			
+			b_edges = g.incident_edges(act)
+			for e in b_edges:
+				if not e.is_unexplored():
+					if DEBUG:
+						print('Going in a back edge ' + str(e))
+					if prec != e.opposite(act):
+						prec = e.opposite(act)
+						break
+					#questo evita di tornare sempre al nodo in cui mi trovavo prima
+					#di percorrere il primo back edge
+				
 			new = prec
 			going_back = True
+
 			if DEBUG:
 				print("Nodo " + str(act) + " solo con blind spot. Setto come new node " + str(prec))
-		else:
-			i+=1
+		else:			
+			#i+=1
+			pass
+
+
 		prec = act
 		act = new
 		act_edge = new_edge	
 		if DEBUG:
 			time.sleep(1)
-
-
-		
-
-"""
-		for e in edges:
-				if not e.opposite(act).is_visited():
-					new = e.opposite(act)
-					print(str(act))				
-					act.set_visited()
-					e.set_discovery()
-					print(str(act) + ' ' + str(e))
-					i += 1
-				else:
-					e.set_back()
-"""		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-
-	new = None
-	act = u
-	prec = None
-
-	#prendi gli archi incidenti al vertice attuale
-	#considera tutti gli archi incidenti, se sono unexplored, visita il vertice, altrimenti passa al prossimo arco se non è discovery channel
-	#se non ci sono altri archi termina, altrimenti ripeti dal punto 1
 	
-	act.set_visited()
-	print(str(act))
-	i = 0
-
-	if g.degree(u) == 0:
-		print("Only root Graph")
-		return
-
-	while prec != act:
-
-		edges = g.incident_edges(act)
-		#print(g.degree(act))
-		#print(str(act))
-		if g.degree(act) == 1 and prec != None and prec.is_visited():
-			act = prec
-			prec = None
-			new = None
-			#print("PREC " + str(prec))
-			edges = g.incident_edges(act)
-	
-
-		for e in edges:
-			
-			if e.is_unexplored() and not e.is_back():
-				
-				if not e.opposite(act).is_visited():
-					new = e.opposite(act)					
-					new.set_visited()
-					e.set_discovery()
-					print(str(new) + ' ' + str(e))
-					i += 1
-
-				else:
-					e.set_back()
-			else:
-				pass
-
-		prec = act
-		act = new
-"""
+	print('Final i : ' + str(i))
