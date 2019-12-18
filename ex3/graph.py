@@ -106,6 +106,10 @@ class Graph:
 
     def is_back(self):
     	return self._dfs_type == 'back'
+    def set_forbidden(self):
+      self._dfs_type = 'forbidden'
+    def is_forbidden(self):
+      return self._dfs_type == 'forbidden'
 
   #------------------------- Graph methods -------------------------
   def __init__(self, directed=False):

@@ -161,11 +161,12 @@ def iterative_dfs(g, u,DEBUG=False):
 			#nodo con solo blind spot			
 			b_edges = g.incident_edges(act)
 			for e in b_edges:
-				if not e.is_unexplored():
+				if not e.is_unexplored() and not e.is_forbidden():
 					if DEBUG:
 						print('Going in a back edge ' + str(e))
 					if prec != e.opposite(act):
 						prec = e.opposite(act)
+						e.set_forbidden()
 						break
 					#questo evita di tornare sempre al nodo in cui mi trovavo prima
 					#di percorrere il primo back edge
@@ -185,5 +186,5 @@ def iterative_dfs(g, u,DEBUG=False):
 		act_edge = new_edge	
 		if DEBUG:
 			time.sleep(1)
-	
+
 	print('Final i : ' + str(i))
