@@ -12,7 +12,7 @@ class Job:
 	   self.executed_slice = executed_slice
 
 	def __str__(self):
-		return "[" + str(self._name) + "]" + str(self._length) + " " + str(self._priority) + ' Arrived at : ' + str(self.arrival_slice)
+		return "[" + str(self._name) + "]" + 'Length : ' + str(self._length) + " Priority : " + str(self._priority) + ' Arrived at : ' + str(self.arrival_slice)
 	def getpriority(self):
 		return self._priority
 
