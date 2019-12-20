@@ -5,11 +5,12 @@ class Job:
 	"""
 
 	def __init__(self, name, priority, length,arrival_slice,executed_slice=-1):
-	   self._name = name
-	   self._priority = priority
-	   self._length = length
-	   self.arrival_slice = arrival_slice
-	   self.executed_slice = executed_slice
+		assert(arrival_slice >= 0)
+		self._name = name
+		self._priority = priority
+		self._length = length
+		self.arrival_slice = arrival_slice
+		self.executed_slice = executed_slice
 
 	def __str__(self):
 		return "[" + str(self._name) + "]" + 'Length : ' + str(self._length) + " Priority : " + str(self._priority) + ' Arrived at : ' + str(self.arrival_slice)
