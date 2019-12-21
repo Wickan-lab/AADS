@@ -59,7 +59,6 @@ while True:
 		else:
 			print('Slice ' + str(act_slice) + " : No job in execution in this slice")
 
-	
 	command = input("Command: ")    
 	#returns a list of values found in a string
 	values = re.findall('[0-9]+|-[0-9]+',command)
