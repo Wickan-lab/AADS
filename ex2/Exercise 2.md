@@ -44,6 +44,16 @@ Another solution is to include into the key the lenght of the job.
 
 In this way a shorter job is executed first, when priorities are the same. But this creates another problem which is starvation. Even if a job can climb up to maximum priority, it is uncertain wheter it can be executed in a finite amount of time. A case where an indefinite amount of shorter (even by 1 time slice) jobs with maximum priority arrives to the scheduler can cause starvation, in theory. In practice, for this to happen, it would require as said above an indefinite amount of maximum priority jobs, which in practical cases should not be common.
 
+###### Operation Complexity
+
+We have as many add in the queue as remove. The operation of update of the queued jobs, which is either increase the waiting time or the priority, needs to go over every element of the queue.
+
+| Operation                 | Complexity |
+| ------------------------- | ---------- |
+| update_queued_jobs(P,tau) | Omega(n)   |
+| P.min()                   | O(1)       |
+| P.add(), P.remove_min()   | O(logn)    |
+
 ###### How did we decide the value of X?
 
 To determine the value of X we opted for the  **exponential moving average** which is a weighted moving average. This predicts the length of the next cpu burst (*tau*) by using weights and the current CPU burst length. Weights (*alfa*) are, by default, set to *0.5*
@@ -61,5 +71,3 @@ This means that if a job waits for more than the estimated CPU burst length, the
 ```bash
 python3.6 mainP.py <alfavalue>
 ```
-
-
