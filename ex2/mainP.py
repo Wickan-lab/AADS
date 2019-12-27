@@ -89,11 +89,11 @@ def main():
 		command = input("Command: ")    
 		#returns a list of values found in a string
 		#values = re.findall('[0-9]+|-[0-9]+',command)
-		#need both priority and length
+		
 		split_command = command.split(' ')
 			
 		if len(split_command) == 8:
-			
+
 			(name,length,priority) = (split_command[1],split_command[4],split_command[7])
 
 			if 0 < int(length) <= 100 and -20 <= int(priority) <= 19:
