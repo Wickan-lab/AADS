@@ -1,15 +1,13 @@
 class Job:
-	__slots__ = '_priority', '_length', '_name', 'arrival_slice','executed_slice'
-	"""
-	Secondo me raga potrebbe volerci anche un tempo di arrivo e un tempo di esecuzione per motivi che spiego nel main
-	"""
+	__slots__ = '_priority', '_length', '_name', 'arrival_slice','waiting_time','executed_slice'
 
-	def __init__(self, name, priority, length,arrival_slice,executed_slice=-1):
-		assert(arrival_slice >= 0)
+	def __init__(self, name, priority, length,arrival_slice,waiting_time=0,executed_slice=-1):
+		#assert(arrival_slice >= 0)
 		self._name = name
 		self._priority = priority
 		self._length = length
 		self.arrival_slice = arrival_slice
+		self.waiting_time = waiting_time
 		self.executed_slice = executed_slice
 
 	def __str__(self):
