@@ -59,7 +59,7 @@ def update_X(t,tau,alfa=1/2):
 
 
 def main():
-	global act_slice
+	global act_slice,alfa
 	current_executing_job = None
 	q = ex2_apq()
 	tau = 1
@@ -81,7 +81,7 @@ def main():
 				current_executing_job.executed_slice = act_slice				
 				print("Slice " + str(act_slice) + ' Executing job ' + str(current_executing_job))
 
-				tau = update_X(current_executing_job._length,tau)
+				tau = update_X(current_executing_job._length,tau,alfa=alfa)
 			else:
 
 				print('Slice ' + str(act_slice) + " : No job in execution in this slice")
