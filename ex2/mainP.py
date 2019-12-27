@@ -88,13 +88,16 @@ def main():
 
 		command = input("Command: ")    
 		#returns a list of values found in a string
-		values = re.findall('[0-9]+|-[0-9]+',command)
+		#values = re.findall('[0-9]+|-[0-9]+',command)
 		#need both priority and length
-		if len(values) > 1:
-			(length,priority) =  values
+		split_command = command.split(' ')
+			
+		if len(split_command) == 8:
+			
+			(name,length,priority) = (split_command[1],split_command[4],split_command[7])
 
 			if 0 < int(length) <= 100 and -20 <= int(priority) <= 19:
-				job = Job('Job' + str(act_slice), int(priority), int(length), act_slice)
+				job = Job(name, int(priority), int(length), act_slice)
 				key = job._priority
 				q.add(key,job)
 			else:
@@ -102,7 +105,7 @@ def main():
 			
 
 		else:
-			print('No job inserted in this slice')
+			print('No job inserted in this slice/invalid command')
 
 		act_slice += 1
 
