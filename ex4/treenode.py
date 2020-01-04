@@ -34,10 +34,11 @@ class TreeNode(object):
 
     def give_software(self, count=0):
         d = {}
-        d[self.name] = False
 
         if count != 0:
             return count
+
+        d[self.name] = False
 
         size_in = 1
         size_ex = 0
