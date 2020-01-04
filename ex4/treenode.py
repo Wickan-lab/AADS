@@ -66,6 +66,7 @@ class TreeNode(object):
             if size_in <= size_ex:
                 d[self.name] = True
                 d.update(d_in)
+                print("ciao")
             else:
                 for c in self.children:
                     d[c.name] = True
