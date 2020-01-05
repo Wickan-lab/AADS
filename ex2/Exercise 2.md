@@ -8,7 +8,7 @@ Your simulator must output the name of the job running on the CPU in each time s
 ```
 
 The scheduler simulator uses an adaptable priority queue. The queue is implemented by a min-heap. 
-Each job is represented by an object of the Job class. Its attributes are:
+Each job is an object istance of the Job class. Its attributes are:
 
 - priority, ranging from -20 to 19, where -20 is the maximum priority.
 
