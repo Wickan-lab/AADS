@@ -6,7 +6,6 @@ def remove_edges_vertex(gc,v):
 	"""
 	Removes all incident edges on the vertex v.
 	"""
-
 	remove_edges_v = gc.incident_edges(v)
 	covered_vert_v = [e.opposite(v) for e in remove_edges_v]
 
@@ -30,9 +29,7 @@ def remove_edges_vertex(gc,v):
 		del gc._incoming[v]
 	del gc._outgoing[v]
 
-	
 	return gc
-
 
 def vc_approx_2(gc):
 	"""

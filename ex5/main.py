@@ -5,13 +5,10 @@ import random
 import time
 
 def main():
-	#g = Graph()
-
 	start_time = time.time()
 	
 	n_vert = 100
 
-	
 	rows = n_vert
 	cols = rows
 	#matrix = [[random.getrandbits(1) for x in range(cols)] for x in range(rows)]
