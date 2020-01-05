@@ -7,6 +7,7 @@ def main():
 	
 	u = g.insert_vertex('u')
 	m = g.insert_vertex('m')
+	z = g.insert_vertex('z')
 	"""
 	
 	
@@ -22,7 +23,7 @@ def main():
 	
 	m_s = g.insert_edge(m,s)
 	"""
-	#u_m = g.insert_edge(u,m)
+	u_m = g.insert_edge(u,m)
 	#m_u = u_m = g.insert_edge(m,u)
 
 	iterative_dfs(g,u)

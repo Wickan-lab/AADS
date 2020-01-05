@@ -67,17 +67,18 @@ def DFS_complete(g):
 	return forest
 
 """Exercise 3 iterative DFS"""
-def set_unexplored_v_e(g):
-
-	for v in g.vertices():
-		v.set_unexplored()
-	for e in g.edges():
-		e.set_unexplored()
 
 def iterative_dfs(g, u,DEBUG=False):
 	"""A version of the DFS algorithm, good ol' iterative."""
-	
-	set_unexplored_v_e(g)
+	mtod = g.vertex_count()
+	#vertices with more than 0 as degree
+	for v in g.vertices():
+		v.set_unexplored()
+		if g.degree(v) < 1:
+			mtod -= 1
+
+	for e in g.edges():
+		e.set_unexplored()
 
 	if g.degree(u) == 0:
 		print("Only root Graph")
@@ -101,7 +102,7 @@ def iterative_dfs(g, u,DEBUG=False):
 
 	print(g.vertex_count())
 
-	while i < (g.vertex_count()):
+	while i < (mtod):
 
 		if not act.is_visited():
 			act.set_visited()
