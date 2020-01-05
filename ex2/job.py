@@ -21,9 +21,6 @@ class Job:
 	def delpriority(self):
 		del self._priority
 
-	
-
-
 	def getlength(self):
 		return self._length
 
@@ -33,7 +30,6 @@ class Job:
 	def dellength(self):
 		del self._length
 
-
 	def getname(self):
 		return self._name
 
@@ -42,9 +38,6 @@ class Job:
 
 	def delname(self):
 		del self._name
-
-
-
 
 	priority_property = property(getpriority, setpriority, delpriority, "I'm the 'priority' property.")
 	length_property = property(getlength, setlength, dellength , "I'm the 'length' property.")
@@ -58,7 +51,6 @@ class Job:
 	del j.name il deleter viene chiamato
 	"""
 
-
 	def greater(self,b):
 		return self._priority > b.priority
 
@@ -70,4 +62,3 @@ class Job:
 
 	def less_equal(self,b):
 		return not greater()
-
