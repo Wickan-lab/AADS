@@ -40,25 +40,25 @@ class TreeNode(object):
 
         d[self.name] = False
 
-        size_in = 1
-        size_ex = 0
+        root_in = 1
+        root_ex = 0
         d_in = {}
         d_ex = {}
 
         for c in self.children:
             (x, dic) = c.give_software(count)
-            size_in += x
+            root_in += x
             d_in.update(dic)
 
-            size_ex += 1
+            root_ex += 1
 
             for j in range(0, c.degree()):
                 (x, dic) = c.children[j].give_software(count)
-                size_ex += x
+                root_ex += x
                 d_ex.update(dic)
 
-        count = min(size_in, size_ex)
-        if size_in <= size_ex:
+        count = min(root_in, root_ex)
+        if root_in <= root_ex:
             d[self.name] = True
             d.update(d_in)
         else:
