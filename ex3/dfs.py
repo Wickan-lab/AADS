@@ -77,8 +77,6 @@ def iterative_dfs(g, u,DEBUG=False):
 	#se non ci sono altri archi termina, altrimenti ripeti dal punto 1	
 	i = 0
 
-	#tolgo la u
-
 	print(g.vertex_count())
 
 	while i < (g.vertex_count()):
@@ -89,9 +87,6 @@ def iterative_dfs(g, u,DEBUG=False):
 			if DEBUG:
 				print('Incrementing i ' + str(i))
 				print()
-
-		#print(i)
-		#print([str(x) for x in g.incident_edges(act)])
 
 		if not going_back:
 			print("DFS " + str(act) + ' ' + str(act_edge))
