@@ -1,5 +1,5 @@
 class TreeNode(object):
-    "Generic tree node."
+    #Generic tree node.
 
     def __init__(self, name, children=None):
         self.name = name
