@@ -166,7 +166,7 @@ def iterative_dfs(g, u,DEBUG=False):
 		"""
 		"""
 		if new == act:
-			#nodo con solo blind spot			
+					
 			b_edges = g.incident_edges(act)
 			for e in b_edges:
 				if not e.is_unexplored() and not e.is_forbidden():
@@ -191,7 +191,9 @@ def iterative_dfs(g, u,DEBUG=False):
 
 		prec = act
 		act = new
-		act_edge = new_edge	
+		act_edge = new_edge
+
+		
 		if DEBUG:
 			time.sleep(1)
 
