@@ -5,7 +5,6 @@ from job import *
 import sys
 import math
 
-
 act_slice = 0
 alfa = float(sys.argv[1] if len(sys.argv) > 1 else 1/2)
 if not(0 <= alfa <= 1):
@@ -35,7 +34,6 @@ def update_queued_jobs(q,X):
 		priority = loc._key	
 		oldjob = loc._value
 
-
 		if (oldjob.waiting_time) >= X:
 			if -20 < priority <= 19:
 				print('increasing priority of ' + str(oldjob._name))
@@ -50,13 +48,9 @@ def update_queued_jobs(q,X):
 		newkey = newvalue._priority
 		q.update(loc,newkey,newvalue)
 			
-
-
-
 def update_X(t,tau,alfa=1/2):	
 	#print("Float tau " + str(alfa * t + (1 - alfa) * tau))
 	return math.ceil(alfa * t + (1 - alfa) * tau)
-
 
 def main():
 	global act_slice,alfa
@@ -69,27 +63,18 @@ def main():
 		update_queued_jobs(q,tau)
 
 		if current_executing_job:
-
 			print("Slice " + str(act_slice) + " Executing : " + str(current_executing_job))
-
 		else:        
-
 			if not q.is_empty():
-
-
 				current_executing_job = q.remove_min()[1]
 				current_executing_job.executed_slice = act_slice				
 				print("Slice " + str(act_slice) + ' Executing job ' + str(current_executing_job))
 
 				tau = update_X(current_executing_job._length,tau,alfa=alfa)
 			else:
-
 				print('Slice ' + str(act_slice) + " : No job in execution in this slice")
 
 		command = input("Command: ")    
-		#returns a list of values found in a string
-		#values = re.findall('[0-9]+|-[0-9]+',command)
-		
 		split_command = command.split(' ')
 			
 		if len(split_command) == 8:
@@ -102,8 +87,6 @@ def main():
 				q.add(key,job)
 			else:
 				print('Invalid values, skipping to the next slice')
-			
-
 		else:
 			print('No job inserted in this slice/invalid command')
 
@@ -113,7 +96,6 @@ def main():
 			if (int(current_executing_job._length) + current_executing_job.executed_slice) <= act_slice:
 				current_executing_job = None
 		print()
-
 
 if __name__ == '__main__':
 	main()
