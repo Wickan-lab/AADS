@@ -80,7 +80,7 @@ However this algorithm does not have a bounded ratio. By choosing vertices 1 by 
 python3.6 main.py
 ```
 
-Executing the main script will create the required 100 graphs with 100 vertices and the random number of nodes. The graph will be modified after the execution of the function. If you want to avoid that, pass a deepcopy instead.
+Executing the main script will create the required 100 graphs with 100 vertices and the random number of edges. The graph will be modified after the execution of the function. If you want to avoid that, pass a deepcopy instead.
 
 ```bash
 pip3 install copy
