@@ -1,5 +1,6 @@
 from treenode import TreeNode
 
+#TEST 1
 dile = TreeNode("Dile")
 edo = TreeNode("Edo")
 raffo = TreeNode("Raffo", [dile, edo])
@@ -20,6 +21,7 @@ print("\n")
 
 print(cami.give_software())
 
+#TEST 2
 tredici = TreeNode("13", [TreeNode("16"), TreeNode("17")])
 otto = TreeNode("8", [TreeNode("12"), tredici, TreeNode("14")])
 quattro = TreeNode("4", [TreeNode("9"), TreeNode("10")])
@@ -33,6 +35,7 @@ uno = TreeNode("1", [due, tre, quattro])
 print(uno)
 print(uno.give_software())
 
+#TEST 3
 a = TreeNode("a")
 b = TreeNode("b")
 c = TreeNode("c", [TreeNode("d", [TreeNode("e", [TreeNode("f", [TreeNode("g")]), TreeNode("h", [TreeNode("i"), TreeNode("l")])])])])
