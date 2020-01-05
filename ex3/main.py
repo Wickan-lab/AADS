@@ -17,21 +17,17 @@ def main():
 	l = g.insert_vertex('l')	
 	m = g.insert_vertex('m')
 	n = g.insert_vertex('n')
-
 	x = g.insert_vertex('x')
-
 	s = g.insert_vertex('s')
-
 	y = g.insert_vertex('y')
-
 	d = g.insert_vertex('d')
 	e = g.insert_vertex('e')
 	j = g.insert_vertex('j')
 	k = g.insert_vertex('k')
-
 	p = g.insert_vertex('p')
 	q = g.insert_vertex('q')
 	r = g.insert_vertex('r')
+	
 	g_ = g.insert_vertex('g_')
 	e_ = g.insert_vertex('e_')
 
@@ -41,15 +37,6 @@ def main():
 	n4 = g.insert_vertex('4')
 	n5 = g.insert_vertex('5')
 	n6 = g.insert_vertex('6')
-
-
-
-
-
-
-
-
-
 
 
 	u_t = g.insert_edge(u,t)
@@ -66,11 +53,12 @@ def main():
 	w_f = g.insert_edge(w,f)
 
 
-	#test 1
+	#TEST 1
 	c_u = g.insert_edge(c,u)
 	w_l = g.insert_edge(w,l)
 	l_f = g.insert_edge(l,f)
-	#test 2
+	
+	#TEST 2
 	a_b = g.insert_edge(a,b)
 	b_l = g.insert_edge(b,l)
 	l_c = g.insert_edge(l,c)
@@ -79,29 +67,25 @@ def main():
 	n_h = g.insert_edge(n,h)
 	n_l = g.insert_edge(n,l)
 
-	#test 3
-
+	#TEST 3
 	z_x = g.insert_edge(z,x)
-
 	x_h = g.insert_edge(x,h)	
 	x_t = g.insert_edge(x,t)
-
 	s_n = g.insert_edge(s,n)
 	s_c = g.insert_edge(s,c)
 	s_l = g.insert_edge(s,l)
-
 	y_w = g.insert_edge(y,w)
 	y_a = g.insert_edge(y,a)
 	y_b = g.insert_edge(y,b)
 	y_l = g.insert_edge(y,l)
 
-	#test 4
+	#TEST 4
 	c_e = g.insert_edge(c,e)
 	e_d = g.insert_edge(e,d)
 	d_j = g.insert_edge(d,j)
 	j_k = g.insert_edge(j,k)
 
-	#test5
+	#TEST 5
 	p_x = g.insert_edge(p,x)
 	p_q = g.insert_edge(p,q)
 	q_x = g.insert_edge(q,x)
@@ -111,28 +95,22 @@ def main():
 	g__e = g.insert_edge(g_,e)
 	e_e_ = g.insert_edge(e,e_)
 
-	#test6
+	#TEST 6
 	w_n3 = g.insert_edge(w,n3)
 	n3_n4 = g.insert_edge(n3,n4)
 	n3_n1 = g.insert_edge(n3,n1)
 	n3_n2 = g.insert_edge(n3,n2)
-	
 	n1_n2 = g.insert_edge(n1,n2)
 	n1_n4 = g.insert_edge(n1,n4)
-
 	n4_n2 = g.insert_edge(n4,n2)
-
 	p_n5 = g.insert_edge(p,n5)
 	n5_m = g.insert_edge(n5,m)
 	m_n6 = g.insert_edge(m,n6)
 	n6_u = g.insert_edge(n6,u)
 
-
-
 	"""	
 	a_b = g.insert_edge(a,b)
 	b_f = g.insert_edge(b,f)
-	
 
 	a_l = g.insert_edge(a,l)
 	m_l = g.insert_edge(m,l)
@@ -140,15 +118,6 @@ def main():
 	d_b = g.insert_edge(d,b)
 	"""	
 	iterative_dfs(g,z)
-
-
-
-
-
-
-
-
-
 
 
 
