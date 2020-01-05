@@ -55,7 +55,7 @@ $$
 2*OPT(V) \geqslant 2*X \Leftrightarrow 2*OPT(V) \geqslant |C| 
 $$
 
-Before this algorithm we tried another way.
+Before this algorithm we explored another path.
 
 ```textile
 Let C be a collection of vertices
@@ -72,4 +72,18 @@ return C
 
 The reasoning behind this algorithm is: we choose the highest degree vertex, because it covers the highest number of friends in the BaceFook network graph, so we minimize the number of software installations.
 
-However this algorithm does not have a bounded ratio. The reason being that, by choosing vertices 1 by 1, we cannot be sure that those who are chosen are in the optimal vertex cover. If we add couples of vertices we are sure that at least one of them is in the minimum vertex cover. Therefore the bounded ratio.
+However this algorithm does not have a bounded ratio. By choosing vertices 1 by 1, we cannot be sure that those who are chosen are in the optimal vertex cover. If we add couples of vertices we are sure that at least one of them is in the minimum vertex cover.
+
+##### Usage
+
+```bash
+python3.6 main.py
+```
+
+Executing the main script will create the required 100 graphs with 100 vertices and the random number of nodes. The graph will be modified after the execution of the function. If you want to avoid that, pass a deepcopy instead.
+
+```bash
+pip3 install copy
+import copy
+deep_g = copy.deepcopy(g)
+```

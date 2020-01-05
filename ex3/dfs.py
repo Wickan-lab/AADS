@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import time
+
 def DFS(g, u, discovered):
 	"""Perform DFS of the undiscovered portion of Graph g starting at Vertex u.
 

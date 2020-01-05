@@ -49,8 +49,5 @@ def main():
 	print("--- %s seconds to execute the algorithm (UNbounded)---" % (time.time() - start_time))
 	"""
 
-	
-	return g,vc_approx_2(g)
-
 if __name__ == '__main__':
 	main()
