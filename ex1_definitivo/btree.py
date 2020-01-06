@@ -56,7 +56,7 @@ class BTree():
 		return node.parent
 
 	def num_children(self, node):
-		print(node)
+		#print(node)
 		if node.toppa != None:
 			none = 0
 		else:
@@ -98,7 +98,7 @@ class BTree():
 			return r.append(node.toppa)
 		"""
 		if node.toppa is not None:
-			return [node[x] for x in node] + [node.toppa[x] for x in node.toppa]  
+			return [node[x][1] for x in node] + [node.toppa[x][1] for x in node.toppa]  
 		return node.values()
 
 	def __len__(self):
@@ -115,7 +115,7 @@ class BTree():
 			return None
 
 		fi = root[k]
-		print(fi[1])
+		#print(fi[1])
 		#found , index
 		if not fi[0]:
 			return self.search(fi[1],k)
@@ -140,14 +140,16 @@ class BTree():
 		  return 1 + max(self._height2(c) for c in self.children(root))
 
 	def height(self, node=None):
+		print(self.get_root()) 
 		if node is None:
 			node = self.get_root()
-			print(str(node))
+			#print(str(node))
 		return self._height2(node)        # start _height2 recursion
 
-	def LevelOrder(self): 
+	def LevelOrder(self):
+		
 		h = height(self.get_root())
-		print(h)
+		#print(h)
 		#avoid last level, not needed, and avoid root
 		for i in range(2, h): 
 			givenLevel(root, i)  
