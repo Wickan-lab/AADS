@@ -27,8 +27,8 @@ t[40] = "ciao"
 tree = BTree(4)
 
 tree.root = t
-
-print([str(x) for x in tree.children(t)])
+print([str(x) for x in tree.children(tree.get_root())])
+"""
 #print(tree.num_children(t))
 root = tree.get_root()
 s = tree.search(t,10)
@@ -36,3 +36,5 @@ print(s)
 print([str(x) for x in s])
 
 #print([str(x) for x in t[2][1]])
+"""
+#sprint(tree.height())

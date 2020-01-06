@@ -13,13 +13,13 @@ class BTree():
 
 	class BTreeNode(SortedTableMap):
 
-		# 1) root property: la radice ha almeno 2 e al max b figli.
+		# 1) root property: la radice ha almeno ceil((b-1)/2) e al max b figli.
 		# 2) node size property: ogni nodo interno (che non sia la radice) ha almeno a figli e al max b figli.
 		# 3) depth property: tutte le foglie hanno la stessa profondità
 		def __init__(self,p):
 			super().__init__()
 			self.parent = p
-			self.toppa = None
+			self.toppa = SortedTableMap()
 
 		def _find_index(self, k, low, high):
 			if high < low:
@@ -42,7 +42,7 @@ class BTree():
 				#raise KeyError('Key Error: '+ repr(k))
 				return (False,self.table[j].value)
 
-			return (True, self.table[j].key)
+			return (True, self.table[j].value)
 
 	# ---------- private behaviours ----------
 
@@ -56,7 +56,7 @@ class BTree():
 		return node.parent
 
 	def num_children(self, node):
-		
+		print(node)
 		if node.toppa != None:
 			none = 0
 		else:
@@ -97,7 +97,9 @@ class BTree():
 		else:
 			return r.append(node.toppa)
 		"""
-		return node.values()
+		if node.toppa is not None:
+			return [node[x] for x in node] + [node.toppa[x] for x in node.toppa]  
+		return
 
 	def __len__(self):
 		return self.len
@@ -120,16 +122,46 @@ class BTree():
 		else:
 			return root
 
+	def check_root_property(self):
+		# 1) root property: la radice ha almeno a e al max b figli.
+		import math
+		if self.num_children(self.root) in range(math.ceil((self.b + 1)/2), self.b + 1):
+			return True
+		return False
 
-	def check_root_property(self, b):
-		if self.firstMap.__len__() < 1:
-			pass
+	def is_leaf(self, node):
+		return self.num_children(node) == 0
+
+	def _height2(self, root):                  # time is linear in size of subtree
+	
+		if self.is_leaf(root):
+		  return 0
 		else:
-			if self.firstMap.__len__() in range (2 , b):
-				return True
-			else:
-				return False
+		  return 1 + max(self._height2(c) for c in self.children(root))
 
+	def height(self, node=None):
+		if node is None:
+			node = self.get_root()
+			print(str(node))
+		return self._height2(node)        # start _height2 recursion
+
+	def LevelOrder(self): 
+		h = height(self.get_root())
+		print(h)
+		#avoid last level, not needed, and avoid root
+		for i in range(2, h): 
+			givenLevel(root, i)  
+
+	def givenLevel(self,root , level): 
+		level_nodes = []
+
+		if root is None: 
+			return
+		if level == 1: 
+			return level_nodes.append(root)
+		elif level > 1 : 
+			for c in self.children():
+				level_nodes.append(givenLevel(c,level - 1))
 
 	def check_node_size_property(self, a, b ):
 		if self.firstMap.__len__() < 1:
