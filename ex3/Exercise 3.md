@@ -18,8 +18,10 @@ When a 1-degree vertex is found, we need to go back in the graph through an edge
 
 ###### Time complexity
 
-The algorithm, in the worst case, is forced to go through each vertex in a connected component and for each vertex it has to run across each edge not once but twice, in the said case. 
+The algorithm, in the worst case, is forced to go through each vertex in a connected component and for each vertex it has to run across each edge not once but twice, in the said case. (We ignored the computation needed to set all edges and vertices to unexplored in the time complexity calculation)
 
 $$
-O(nm^2)
+O(n(m + m)) => O(nm)
 $$
+
+
