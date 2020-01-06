@@ -42,12 +42,12 @@ class BTree():
 				#raise KeyError('Key Error: '+ repr(k))
 				return (False,self.table[j].value)
 
-			return (True,self.table[j].value)
+			return (True, self.table[j].key)
 
 	# ---------- private behaviours ----------
 
 
-	# ---------- public behaviours ----------
+	# ---------- public behaviours -----------
 
 	def get_root(self):
 		return self.root
@@ -87,6 +87,7 @@ class BTree():
 
 	def children(self, node):
 		#decidere se restituire i None oppure no
+		"""
 		r = []
 		for c in node.values():
 			if c[1] != None:
@@ -95,8 +96,8 @@ class BTree():
 			return r
 		else:
 			return r.append(node.toppa)
-		
-		#return node.values()
+		"""
+		return node.values()
 
 	def __len__(self):
 		return self.len
@@ -112,7 +113,7 @@ class BTree():
 			return None
 
 		fi = root[k]
-		print(fi)
+		print(fi[1])
 		#found , index
 		if not fi[0]:
 			return self.search(fi[1],k)
