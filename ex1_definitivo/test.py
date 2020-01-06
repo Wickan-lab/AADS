@@ -5,7 +5,7 @@ t = BTree(4).BTreeNode(None)
 c = BTree(4).BTreeNode(t)
 a = BTree(4).BTreeNode(t)
 d = BTree(4).BTreeNode(c)
-
+e = BTree(4).BTreeNode(c)
 a[12] = 'pp'
 a[15] = 'gg'
 
@@ -14,6 +14,11 @@ d[5] = 'gjk'
 
 c[3] = 'pcfg'
 c[6] = d
+
+e[7] = 'c'
+e[8] = 'a'
+c.toppa = e
+
 
 t[10] = c
 t[20] = a
@@ -26,7 +31,7 @@ tree.root = t
 print([str(x) for x in tree.children(t)])
 #print(tree.num_children(t))
 root = tree.get_root()
-s = tree.search(t,4)
+s = tree.search(t,8)
 print(s)
 print([str(x) for x in s])
 

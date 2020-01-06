@@ -36,9 +36,12 @@ class BTree():
 
 		def __getitem__(self, k):
 			j = self._find_index(k, 0, len(self.table)-1)
-			if j == len(self.table) or self.table[j].key != k:
+			if j == len(self.table):
+				return (False,self.toppa)
+			if self.table[j].key != k:
 				#raise KeyError('Key Error: '+ repr(k))
 				return (False,self.table[j].value)
+
 			return (True,self.table[j].value)
 
 	# ---------- private behaviours ----------
@@ -88,10 +91,10 @@ class BTree():
 		for c in node.values():
 			if c[1] != None:
 				r.append(c[1])
-		if node.toppa == None:
+		if node.toppa == None or len(node.toppa) == 0:
 			return r
 		else:
-			return r.append(toppa)
+			return r.append(node.toppa)
 		
 		#return node.values()
 
