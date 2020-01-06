@@ -6,24 +6,24 @@ c = BTree(4).BTreeNode(t)
 a = BTree(4).BTreeNode(t)
 d = BTree(4).BTreeNode(c)
 e = BTree(4).BTreeNode(c)
-a[12] = 'pp'
-a[15] = 'gg'
+a[12] = None
+a[15] = None
 
-d[4] = 'ff'
-d[5] = 'gjk'
+d[4] = None
+d[5] = None
 
-c[3] = 'pcfg'
+c[3] = None
 c[6] = d
 
-e[7] = 'c'
-e[8] = 'a'
+e[7] = None
+e[8] = None
 c.toppa = e
 
 
 t[10] = c
 t[20] = a
-t[30] = 'raf + giovanni'
-t[40] = "ciao"
+t[30] = None
+t[40] = None
 tree = BTree(4)
 
 tree.root = t
@@ -36,5 +36,6 @@ print([str(x) for x in s])
 
 #print([str(x) for x in t[2][1]])
 """
-print([str(x) for x in tree.children(tree.get_root())])
+#print([str(x) for x in tree.children(tree.get_root())])
 print(tree.height())
+print(tree.check_depth_property())

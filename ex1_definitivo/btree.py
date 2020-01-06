@@ -57,6 +57,9 @@ class BTree():
 
 	def num_children(self, node):
 		#print(node)
+		if node is None:
+			return 0
+
 		if node.toppa != None:
 			none = 0
 		else:
@@ -146,14 +149,6 @@ class BTree():
 			#print(str(node))
 		return self._height2(node)        # start _height2 recursion
 
-	def LevelOrder(self):
-		
-		h = height(self.get_root())
-		#print(h)
-		#avoid last level, not needed, and avoid root
-		for i in range(2, h): 
-			givenLevel(root, i)  
-
 	def givenLevel(self,root , level): 
 		level_nodes = []
 
@@ -162,8 +157,22 @@ class BTree():
 		if level == 1: 
 			return level_nodes.append(root)
 		elif level > 1 : 
-			for c in self.children():
-				level_nodes.append(givenLevel(c,level - 1))
+			for c in self.children(root):
+				level_nodes.append(self.givenLevel(c,level - 1))
+				return level_nodes
+
+	def LevelOrder(self,root):		
+		h = self.height(self.get_root())
+		#print(h)
+		#avoid last level, not needed, and avoid root
+		for i in range(2, h): 
+			r = self.givenLevel(root, i)
+			for node in r:
+				if self.is_leaf(node):
+					return False
+
+		return True
+
 
 	def check_node_size_property(self, a, b ):
 		if self.firstMap.__len__() < 1:
@@ -174,15 +183,7 @@ class BTree():
 			return False
 
 	def check_depth_property(self):
-		for k in self.firstMap.keys():
-			if self.is_leaf():
-				d = self.depth(k)
-				break
-		for k in self.firstMap.keys():
-			if self.is_leaf():
-				if self.depth(k).__ne__(d):
-					return False
-		return True
+		return self.LevelOrder(self.get_root())
 
 
 
