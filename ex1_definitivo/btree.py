@@ -175,13 +175,12 @@ class BTree():
 		return True
 
 
-	def check_node_size_property(self, a, b ):
-		if self.firstMap.__len__() < 1:
-			pass
-		if self.secondMap.__len__() in range(a, b):
-			return True
-		else:
-			return False
+	 def check_node_size_property(self):
+        	self.height(self.get_root())
+        	if self.num_children(self.get_root()) > math.ceil((self.b + 1) / 2) and self.num_children(self.get_root()) + 1 < self.b:
+            		return True
+        	else:
+            		return False
 
 	def check_depth_property(self):
 		return self.LevelOrder(self.get_root())
