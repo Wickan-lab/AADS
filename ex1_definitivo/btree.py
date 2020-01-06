@@ -99,7 +99,7 @@ class BTree():
 		"""
 		if node.toppa is not None:
 			return [node[x] for x in node] + [node.toppa[x] for x in node.toppa]  
-		return
+		return node.values()
 
 	def __len__(self):
 		return self.len
