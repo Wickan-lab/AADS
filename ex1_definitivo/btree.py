@@ -127,8 +127,14 @@ class BTree():
 
 	def check_root_property(self):
 		# 1) root property: la radice ha almeno a e al max b figli.
+		"""
 		import math
 		if self.num_children(self.root) in range(math.ceil((self.b + 1)/2), self.b + 1):
+			return True
+		return False
+		"""
+		if self.num_children(self.root) in range(2,self.b +1):
+
 			return True
 		return False
 
