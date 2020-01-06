@@ -2,123 +2,170 @@ from tree import *
 from sortedtablemap import *
 
 
-class BTreeNode(Tree):
-
-    # 1) root property: la radice ha almeno 2 e al max b figli.
-    # 2) node size property: ogni nodo interno (che non sia la radice) ha almeno a figli e al max b figli.
-    # 3) depth property: tutte le foglie hanno la stessa profondità
 
 
-    def __init__(self):
-        self.firstMap = SortedTableMap
-        self.firstMap.Item.key = []
-        self.firstMap.Item.value = []
+class BTree():
+	#__slots__ = "root", "b"
+	def __init__(self, b):
+		self.root = self.BTreeNode(None)
+		self.b = b
+		self.len = 0
+
+	class BTreeNode(SortedTableMap):
+
+		# 1) root property: la radice ha almeno 2 e al max b figli.
+		# 2) node size property: ogni nodo interno (che non sia la radice) ha almeno a figli e al max b figli.
+		# 3) depth property: tutte le foglie hanno la stessa profondità
+		def __init__(self,p):
+			super().__init__()
+			self.parent = p
+			self.toppa = None
+
+		def _find_index(self, k, low, high):
+			if high < low:
+				return low
+			else:
+				mid = (low+high)//2
+
+				if k == self.table[mid].key:
+					return mid
+				elif k < self.table[mid].key:
+					return  self._find_index(k, 0, mid-1)
+				else :
+					return  self._find_index(k, mid+1, high)
+
+		def __getitem__(self, k):
+			j = self._find_index(k, 0, len(self.table)-1)
+			if j == len(self.table) or self.table[j].key != k:
+				#raise KeyError('Key Error: '+ repr(k))
+				return (False,self.table[j].value)
+			return (True,self.table[j].value)
+
+	# ---------- private behaviours ----------
+
+
+	# ---------- public behaviours ----------
+
+	def get_root(self):
+		return self.root
+
+	def parent(self, node):
+		return node.parent
+
+	def num_children(self, node):
+		
+		if node.toppa != None:
+			none = 0
+		else:
+			none = 1
+		"""
+		none = 0
+		
+		first = node.find_min()
+
+		print(first)
+		if first[1][0] == None:
+			none += 1
+		if first[1][1] == None:
+			none += 1
+		"""
+		for key in node:
+			"""
+			if first[0] == key:
+				continue
+			"""
+			#print(node[key])
+			if node[key][1] is None:
+				none += 1
+		
+
+		return len(node) + 1 - none
+
+
+	def children(self, node):
+		#decidere se restituire i None oppure no
+		r = []
+		for c in node.values():
+			if c[1] != None:
+				r.append(c[1])
+		if node.toppa == None:
+			return r
+		else:
+			return r.append(toppa)
+		
+		#return node.values()
+
+	def __len__(self):
+		return self.len
+
+
+	def search(self, root , k):
+		"""
+		Returns None if the node containing k is not found, otherwise returns the key-containing node
+		"""
+		if len(root) == 0:
+			return None
+		if root == None:
+			return None
+
+		fi = root[k]
+		print(fi)
+		#found , index
+		if not fi[0]:
+			return self.search(fi[1],k)
+		else:
+			return root
+
+
+	def check_root_property(self, b):
+		if self.firstMap.__len__() < 1:
+			pass
+		else:
+			if self.firstMap.__len__() in range (2 , b):
+				return True
+			else:
+				return False
+
+
+	def check_node_size_property(self, a, b ):
+		if self.firstMap.__len__() < 1:
+			pass
+		if self.secondMap.__len__() in range(a, b):
+			return True
+		else:
+			return False
+
+	def check_depth_property(self):
+		for k in self.firstMap.keys():
+			if self.is_leaf():
+				d = self.depth(k)
+				break
+		for k in self.firstMap.keys():
+			if self.is_leaf():
+				if self.depth(k).__ne__(d):
+					return False
+		return True
 
 
 
-    def element(self, x):
-        """Return the element stored at this Position ."""
-        if x in self.firstMap.Item.key:
-            return self.firstMap.Item.key[x]
+	def insert(self, k, values):
+		"""insert a new node (new key in the map) """
+		self.firstMap.__setitem__(k, values)
+		#if (not(self.is_empty() and (self.check_depth_property() or self.check_root_property() or self.check_depth_property()))):
 
 
-    def __eq__(self, other):
-        """Return True if other Position represents the same location."""
-        return (self == other)
-
-
-class BTree(Tree):
-
-    def __init__(self, b):
-        self.root = BTreeNode()
-        self.b = b
-        self.firstMap = SortedTableMap()
-        self.listMap = SortedTableMap()
-        self.listMap = []
-
-
-
-    # ---------- abstract methods that concrete subclass must support ----------
-    def root(self):
-        if self.listMap[0].__len__() > 0:
-            return self.listMap[0].key
-        else:
-            return None
-
-    def parent(self, k):    #DA MODIFICARE
-        if self.firstMap.__len__() > 1 :
-            return self.firstMap.Item.key[k-1]
-        else:
-            return None
-
-    def num_children(self, p):
-        return self.listMap[p].values().__len__()
-
-    def children(self, p):
-        return self.listMap[p].values()
-
-    def __len__(self):
-        return self.listMap.__len__()
-
-
-    def search(self, k):
-        if k in self.firstMap.keys():
-            for k in self.firstMap.keys():
-                print(self.firstMap[k])
-                return self.firstMap[k]
-        else:
-            return None
-
-
-    def check_root_property(self, b):
-        if self.firstMap.__len__() < 1:
-            pass
-        else:
-            if self.firstMap.__len__() in range (2 , b):
-                return True
-            else:
-                return False
-
-
-    def check_node_size_property(self, a, b ):
-        if self.firstMap.__len__() < 1:
-            pass
-        if self.secondMap.__len__() in range(a, b):
-            return True
-        else:
-            return False
-
-    def check_depth_property(self):
-        for k in self.firstMap.keys():
-            if self.is_leaf():
-                d = self.depth(k)
-                break
-        for k in self.firstMap.keys():
-            if self.is_leaf():
-                if self.depth(k).__ne__(d):
-                    return False
-        return True
-
-
-
-    def insert(self, k, values):
-        """insert a new node (new key in the map) """
-        self.firstMap.__setitem__(k, values)
-        #if (not(self.is_empty() and (self.check_depth_property() or self.check_root_property() or self.check_depth_property()))):
-
-
-    #RIBILANCIA
+	#RIBILANCIA
 
 
 
 
-    def delete(self, k, values):
-        self.firstMap.__delitem__(k, values)
-       # if (not(self.check_depth_property() or self.check_root_property() or self.check_depth_property())):
-    #RIBILANCIA
+	def delete(self, k, values):
+		self.firstMap.__delitem__(k, values)
+	   # if (not(self.check_depth_property() or self.check_root_property() or self.check_depth_property())):
+	#RIBILANCIA
 
 
-    # def rebalance()
+	# def rebalance()
 
 
 
