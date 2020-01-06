@@ -6,23 +6,33 @@ class BTree(object):
       self.keys = []
       self.children = []
       self.is_leaf = True
-      # b is the order of the parent B-Tree. Nodes need this value to define max size and splitting.
       self._b = b
+
+    def _find_index(self, k, low, high, node):
+        if high < low:
+            return low
+        else:
+            mid = (low + high) // 2
+
+            if k == node.keys[mid]:
+                return mid
+            elif k < node.keys[mid]:
+                return self._find_index(k, 0, mid - 1, node)
+            else:
+                return self._find_index(k, mid + 1, high, node)
 
     def split(self, parent, key):
       new_node = self.__class__(self._b)
 
-      mid = self.size//2
+      mid = self.size()//2
       split_value = self.keys[mid]
       parent.add_key(split_value)
 
-      # Add keys and children to appropriate nodes
       new_node.children = self.children[mid + 1:]
       self.children = self.children[:mid + 1]
       new_node.keys = self.keys[mid+1:]
       self.keys = self.keys[:mid]
 
-      # If the new_node has children, set it as internal node
       if len(new_node.children) > 0:
         new_node.is_leaf = False
 
@@ -32,11 +42,9 @@ class BTree(object):
       else:
         return new_node
 
-    @property
     def _is_full(self):
-      return self.size == 2 * self._b - 1
+      return self.size() == 2 * self._b - 1
 
-    @property
     def size(self):
       return len(self.keys)
 
@@ -59,7 +67,7 @@ class BTree(object):
 
   def insert(self, key):
     node = self.root
-    if node._is_full:
+    if node._is_full():
       new_root = self.Node(self._b)
       new_root.children.append(self.root)
       new_root.is_leaf = False
@@ -67,14 +75,11 @@ class BTree(object):
       self.root = new_root
 
     while not node.is_leaf:
-      i = node.size - 1
-      while i > 0 and key< node.keys[i] :
-        i -= 1
-      if key> node.keys[i]:
-        i += 1
 
+      i = self._find_index(key, 0, self.size() - 1, node)
       next = node.children[i]
-      if next._is_full:
+
+      if next._is_full():
         node = next.split(node, key)
       else:
         node = next
@@ -89,8 +94,7 @@ class BTree(object):
       return False
     else:
       i = 0
-      while i < node.size and value > node.keys[i]:
-        i += 1
+      i = self._find_index(value, 0, self.size() - 1, node)      
       return self.search(value, node.children[i])
 
   def print_order(self):
