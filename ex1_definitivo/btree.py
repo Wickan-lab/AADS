@@ -177,7 +177,7 @@ class BTree():
 
 	 def check_node_size_property(self):
         	self.height(self.get_root())
-        	if self.num_children(self.get_root()) > math.ceil((self.b + 1) / 2) and self.num_children(self.get_root()) + 1 < self.b:
+        	if self.num_children(self.get_root()) > math.ceil((self.b + 1) / 2) and self.num_children(self.get_root()) < self.b:
             		return True
         	else:
             		return False
