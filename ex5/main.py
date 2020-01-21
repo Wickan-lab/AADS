@@ -1,5 +1,5 @@
 from graph import *
-from dfs import *
+
 from vertexcover import *
 import random
 import time

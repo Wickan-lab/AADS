@@ -23,5 +23,3 @@ The algorithm, in the worst case, is forced to go through each vertex in a conne
 $$
 O(n(m + m)) => O(nm)
 $$
-
-
